@@ -1,0 +1,81 @@
+afandi_homepage:
+    path:     /
+    defaults: { _controller: AfandiBlogBundle:Home:index }
+
+afandi_contact:
+    path:     /contact
+    defaults: { _controller: AfandiBlogBundle:Contact:contact }
+
+blog_post:
+    path:     /post/{id}
+    defaults: { _controller: AfandiBlogBundle:Blogpost:post }
+
+fos_user_security_login:
+    path:     /login
+    defaults: { _controller: AfandiBlogBundle:Security:login }
+    methods:  [GET, POST]
+
+fos_user_security_check:
+    path:     /login_check
+    defaults: { _controller: AfandiBlogBundle:Security:check }
+    methods:  [POST]
+
+fos_user_security_logout:
+    path:     /logout
+    defaults: { _controller: AfandiBlogBundle:Security:login }
+    methods:  [GET]
+
+admin_home:
+    path:     admin
+    defaults: { _controller: AfandiBlogBundle:Admin:home }
+admin_blog_list:
+    path:     admin/blog
+    defaults: { _controller: AfandiBlogBundle:Blog:list }
+
+admin_blog_add:
+    path:     admin/blog/add
+    defaults: { _controller: AfandiBlogBundle:Blog:add }
+
+admin_blog_edit:
+    path:     admin/blog/edit/{id}
+    defaults: { _controller: AfandiBlogBundle:Blog:edit }
+
+admin_blog_delete:
+    path:     admin/blog/delete/{id}
+    defaults: { _controller: AfandiBlogBundle:Blog:delete }
+
+admin_category_list:
+    path:     admin/category
+    defaults: { _controller: AfandiBlogBundle:Category:list }
+
+admin_category_add:
+    path:     admin/category/add
+    defaults: { _controller: AfandiBlogBundle:Category:add }
+
+admin_category_edit:
+    path:     admin/category/edit/{id}
+    defaults: { _controller: AfandiBlogBundle:Category:edit }
+
+admin_category_delete:
+    path:     admin/category/delete/{id}
+    defaults: { _controller: AfandiBlogBundle:Category:delete }
+
+afandi_about:
+    path:     /about
+    defaults: { _controller: AfandiBlogBundle:About:about }
+
+admin_general_list:
+    path:     /admin/general
+    defaults: { _controller: AfandiBlogBundle:General:list }
+
+admin_general_add:
+    path:     /admin/general/add
+    defaults: { _controller: AfandiBlogBundle:General:add }
+
+admin_general_edit:
+    path:     /admin/general/edit/{id}
+    defaults: { _controller: AfandiBlogBundle:General:edit }
+
+admin_general_delete:
+    path:     /admin/general/delete/{id}
+    defaults: { _controller: AfandiBlogBundle:General:delete }

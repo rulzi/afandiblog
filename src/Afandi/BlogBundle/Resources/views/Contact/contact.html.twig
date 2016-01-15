@@ -1,0 +1,66 @@
+{% extends "AfandiBlogBundle::frontlayout.html.twig" %}
+
+{% block header %}
+	
+	<!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url({{ asset('asset/front/img/contact-bg.jpg') }})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Contact Me</h1>
+                        <hr class="small">
+                        <span class="subheading">Have questions? I have answers (maybe).</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+
+{% block content %}
+	
+	<!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                {% for flash_message in app.session.flashbag.get('notice') %}
+				    <div class="alert alert-info" role="alert">
+				    	{{ flash_message }}
+				    </div>
+				{% endfor %}
+                <p>Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you within 24 hours!</p>
+                {{ form_start(form) }}
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            {{ form_label(form.name) }}
+                            {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Name'}}) }}
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            {{ form_label(form.email) }}
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                        </div>
+                    </div>
+                    <div class="row control-group">
+                        <div class="form-group col-xs-12 floating-label-form-group controls">
+                            {{ form_label(form.message) }}
+                            {{ form_widget(form.message, {'attr': {'class': 'form-control', 'placeholder': 'Message'}}) }}
+                        </div>
+                    </div>
+                    <br>
+                    <div id="success"></div>
+                    <div class="row">
+                        <div class="form-group col-xs-12">
+                        	{{ form_widget(form.save, {'attr': {'class': 'btn btn-default'}}) }}
+                        </div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

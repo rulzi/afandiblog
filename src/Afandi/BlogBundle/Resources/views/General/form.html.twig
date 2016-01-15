@@ -1,0 +1,94 @@
+{% extends "AfandiBlogBundle::adminlayout.html.twig" %}
+
+{% block optionalstylesheets %}
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.css" rel="stylesheet">
+    <link href="{{ asset('asset/admin/datepicker/css/datepicker.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block optionaljavascripts %}
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.7.1/summernote.js"></script>
+    <script src="{{ asset('asset/admin/datepicker/js/bootstrap-datepicker.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+		  $('.summernote').summernote();
+		});
+        $('.datepicker').datepicker()
+	</script>
+{% endblock %}
+
+{% block title %}Admin Homepage - Add Blog{% endblock %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"> Add Blog</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                {% if form is empty %}
+                    <div class="alert alert-danger" role="alert">
+                        Id Catgory tidak ada
+                    </div>
+                {% else %}
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="col-lg-6">
+                            {{ form_start(form) }}
+                                <div class="form-group">
+                                    {{ form_label(form.general_name) }}
+                                    {{ form_widget(form.general_name, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.general_value_string) }}
+                                    {{ form_widget(form.general_value_string, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.general_value_integer) }}
+                                    {{ form_widget(form.general_value_integer, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.general_value_date) }}
+                                    {{ form_widget(form.general_value_date, {'attr': {'class' : 'form-control input-inline datepicker',
+                                    'data-provide' : 'datepicker',
+                                    'data-date-format' : 'dd-mm-yyyy'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.general_value_text) }}
+                                    {{ form_widget(form.general_value_text, {'attr': {'class': 'form-control summernote'}}) }}
+                                </div>
+                                <div class="form-group">
+                                    {{ form_label(form.imageFile) }}
+                                    {{ form_widget(form.imageFile, {'attr': {'class': ''}}) }}
+                                </div>
+                                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                                <button type="reset" class="btn btn-default">Reset Button</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+                {% endif %}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+{% endblock %}

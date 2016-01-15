@@ -1,0 +1,24 @@
+{% extends "AfandiBlogBundle::frontlayout.html.twig" %}
+
+{% block blog_title %}
+    {{ blog.title | title }}
+{% endblock %}
+
+{% block blog_keterangan %}
+    Posted by <a href="#">{{blog.author}}</a> on {{blog.createdAt | date("F d, Y")}}
+{% endblock %}
+
+{% block content %}
+	
+	<!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    {{ blog.content | raw }}
+                </div>
+            </div>
+        </div>
+    </article>
+
+{% endblock %}

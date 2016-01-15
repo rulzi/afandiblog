@@ -1,0 +1,89 @@
+{% extends "AfandiBlogBundle::adminlayout.html.twig" %}
+
+{% block title %}Admin Homepage - Blog{% endblock %}
+
+{% block content %}
+
+<!-- Page Content -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Blog</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-12">
+                {% for flash_message in app.session.flashbag.get('notice_nulldata') %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                {% for flash_message in app.session.flashbag.get('notice') %}
+                    <div class="alert alert-success" role="alert">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
+                <div class="panel panel-default">
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                    <a href="{{ path('admin_blog_add') }}"><button type="button" class="btn btn-primary">Add Blog</button></a>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Title</th>
+                                        <th>Author</th>
+                                        <th>Content</th>
+                                        <th>Category</th>
+                                        <th>Feature Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% set no = 1 %}
+                                    {% for blog in blogs %}
+                                        <tr>
+                                            <td>{{ no }}</td>
+                                            <td>{{ blog.title }}</td>
+                                            <td>{{ blog.author }}</td>
+                                            <td>{{ blog.content|striptags [:50] }} ..</td>
+                                            <td>{{ blog.categoryId.name }}</td>
+                                            <td>
+                                                {% if blog.featureImage is not null %}
+                                                <img src="{{ asset(['images/', blog.featureImage] | join) }}" class="img-thumbnail" width="304" height="236">
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('admin_blog_edit', {'id': blog.id }) }}">Edit</a>
+                                                <a href="{{ path('admin_blog_delete', {'id': blog.id }) }}">Hapus</a>
+                                            </td>
+                                        </tr>
+                                        {% set no = no + 1 %}
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="3">No Blog have been found.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        {{ knp_pagination_render(blogs, 'AfandiBlogBundle:Pagination:adminpagination.html.twig') }}
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</div>
+<!-- /#page-wrapper -->
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% if pageCount > 1 %}
+<!-- Pager -->
+<ul class="pager">
+    {% if previous is defined %}
+    <li class="previous">
+        <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}">&larr; Recent Posts</a>
+    </li>
+    {% endif %}
+
+    {% if next is defined %}
+    <li class="next">
+        <a href="{{ path(route, query|merge({(pageParameterName): next})) }}">Older Posts &rarr;</a>
+    </li>
+    {% endif %}
+    
+</ul>
+{% endif %}
